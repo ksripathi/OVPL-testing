@@ -1,4 +1,4 @@
-#+Title: Test Case for the scenario 01: Creation of the Virtual Machine
+#+Title: Test Case for the Scenario 01: Creation of the Virtual Machine
 #+Authors: Prakash B Hegade and Amulya Sri
 #+Date: 01 December 2014
 
