@@ -1,4 +1,4 @@
-#+Title: Test Case for the scenario 02: Copying VMManager files to the Container
+#+Title: Test Case for the Scenario 02: Copying VMManager files to the Container
 #+Authors: Prakash B Hegade and Amulya Sri
 #+Date: 04 December 2014
 
