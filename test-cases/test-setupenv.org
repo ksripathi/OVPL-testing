@@ -1,0 +1,130 @@
+#+title:Testing the Environment set up for OVPL
+#+authors: Prakash B H
+#+date: 20 November 2014
+
+* Description : 
+The objective of performing unit test on this file is to test if the
+environment variable are successfully set for the OVPL.
+
+* Identifying the Dependencies :
+As the test scenario will be implemented in Python, we need to import
+all the necessary modules. We firstly import all the required Python
+modules. 
+
+
+We need a module which provides a portable way of using operating
+system dependent functionality.  For this we have a module called *os*
+which needs to be imported. 
+#+begin_src python
+import os
+#+end_src 
+
+We need a module which provides access to variables used or maintained    
+by interpreter to functions that interact strongly with the    
+interpreter. It can be made available by importing *sys* module.      
+#+begin_src python    
+import sys    
+#+end_src
+
+
+JSON is a lightweight data interchange format based on a subset of
+JavaScript syntax.  json exposes an API familiar to users of the
+standard library =marshal= and =pickle=.  Hence we also import the
+*json* module.
+#+begin_src python
+import json
+#+end_src
+
+
+We also need to import a module which will support the unit
+testing.  There is a module called *unittest* which supports test
+automation, sharing of setup and shutdown code for tests, aggregation
+of tests into collections, and independence of the tests from the
+reporting framework.
+#+begin_src python
+import unittest
+#+end_src
+
+
+Inorder to test we would need to import the =get_subnet= module from
+settings and all the available modules from =envsetup=.
+#+begin_src python
+from envsetup import *
+from settings import get_subnet
+#+end_src
+
+
+* Defining the Test Class :
+A test class in python can be created by subclassing
+=unittest.TestCase=.  The test class created primarily holds two
+predefined methods namely =setUp= and =tearDown= and the test
+cases. Method =setUp= holds the stub creation and =tearDown=
+releases all the held resources.
+
+
+#+begin_src python
+class TestEnvSetup(unittest.TestCase):
+#+end_src
+
+
+Below is the =SetUp= method. We create a constructor of type =EnvSetUp=
+which will be used in all the test cases.
+#+begin_src python
+    def setUp(self):
+        self.e=EnvSetUp()
+#+end_src
+
+
+The first test case is to check if the predefined set of ip addresses
+are set to "no proxy".
+#+begin_src python
+    def test_no_proxy(self):
+        self.no_proxy=self.e.no_proxy
+        assert(self.no_proxy == "10.2.58.128,10.2.58.129,10.2.58.130,10.2.58.131,10.2.58.132,10.2.58.133,10.2.58.134,10.2.58.135,10.2.58.136,10.2.58.137,10.2.58.138,10.2.58.139,10.2.58.140,10.2.58.141,10.2.58.142,10.2.58.143,localhost,10.2.58.129")
+#+end_src
+
+ 
+The second test case is to check if the http-proxy variable is set as
+per network configurations.
+#+begin_src python
+    def test_http_proxy(self):
+	self.http_proxy=self.e.http_proxy
+        assert(self.http_proxy == "http://proxy.iiit.ac.in:8080")
+#+end_src
+
+
+The third test case is to check if the https-proxy variable is set as
+per network configurations.  
+#+begin_src python
+    def test_https_proxy(self):
+        self.https_proxy=self.e.https_proxy
+        assert(self.https_proxy == "https://proxy.iiit.ac.in:8080")
+#+end_src
+
+
+The fourth test case is to check if the environment OS variable is properly set to 
+the network proxy.
+#+begin_src python
+    def test_environment_set(self):
+        self.env = self.a.set_environment()
+        assert(self.a.os.environ[https_proxy] == "http://proxy.iiit.ac.in:8080")
+#+end_src
+ 
+
+Below is the =tearDown= method. As no additional resources were
+allocated in the =setUp= method, =tearDown= is remains empty.
+#+begin_src python
+    def setUp(self):
+        print 'TearDown is Invoked'
+#+end_src
+
+
+* The main Method :
+The test cases are invoked from the main method. The flow is =main=
+first calls the =setUp= method and creates the stub, invokes all the
+test cases and then calls the =tearDown= method.
+This is achieved by calling the =unittest.main=.
+#+begin_src python
+if __name__ == "__main__":
+    unittest.main()
+#+end_src

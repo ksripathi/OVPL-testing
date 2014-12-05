@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>Frequently Asked Questions</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="[2014-09-16 Tue]"/>
+<meta name="author" content="Prakash B Hegade and Amulya Sri, (VLEAD)"/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color:lightblue; font-weight:normal }
+  .target { }
+  .timestamp { color: grey }
+  .timestamp-kwd { color: CadetBlue }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/worg-style.css" />
+<link rel="stylesheet" type="text/css" href="css/override.css" />
+<script type="text/javascript" src="js/org-info.js"></script>
+<script type="text/javascript" >
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "1");
+org_html_manager.set("LINK_HOME", "index.html");
+org_html_manager.set("LINK_UP", "index.html");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*/-->
+</script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*/-->
+</script>
+</head><body>
+<h1 class="title">Frequently Asked Questions</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Generic Queries </a>
+<ul>
+<li><a href="#sec-1.1">1.1 How to give read-write-execute permissions to a file? </a></li>
+<li><a href="#sec-1.2">1.2 How can I install packages using package manager (CentOS) ? </a></li>
+<li><a href="#sec-1.3">1.3 How can I copy file from remote system ? </a></li>
+<li><a href="#sec-1.4">1.4 I was getting error saying, Permission Denied. What should I do? </a></li>
+<li><a href="#sec-1.5">1.5 After i run a file, i get error stating that, process is running already. How should I kill that process ? </a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2 OVPL Dependencies </a>
+<ul>
+<li><a href="#sec-2.1">2.1 What is mongodb? Why should I install it? </a></li>
+<li><a href="#sec-2.2">2.2 What is the use of 'backports.ssl<sub>match</sub><sub>hostname'</sub> package in Python? </a></li>
+<li><a href="#sec-2.3">2.3 What is meant by OpenVZ? </a></li>
+<li><a href="#sec-2.4">2.4 What is Python sh module? </a></li>
+<li><a href="#sec-2.5">2.5 What is Python netaddr module? </a></li>
+<li><a href="#sec-2.6">2.6 What is the use of Python tornado ? </a></li>
+<li><a href="#sec-2.7">2.7 I got an error like, 'No module named requests' What should I do now? </a></li>
+<li><a href="#sec-2.8">2.8 What is requests module in Python? </a></li>
+<li><a href="#sec-2.9">2.9 How do I install pip in centos? </a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">1 Generic Queries </h2>
+<div id="text-1">
+
+
+
+</div>
+
+<div id="outline-container-1.1" class="outline-3">
+<h3 id="sec-1.1">1.1 How to give read-write-execute permissions to a file? </h3>
+<div id="text-1.1">
+
+
+
+
+<pre class="example">
+chmod 0777 fileName
+</pre>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1.2" class="outline-3">
+<h3 id="sec-1.2">1.2 How can I install packages using package manager (CentOS) ? </h3>
+<div id="text-1.2">
+
+
+
+
+<pre class="example">
+yum install packageName
+</pre>
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1.3" class="outline-3">
+<h3 id="sec-1.3">1.3 How can I copy file from remote system ? </h3>
+<div id="text-1.3">
+
+<p>We can copy file from remote system using scp. 
+</p>
+
+
+<pre class="example">
+scp path-to-source-file user@ip:/path-to-destination
+</pre>
+
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1.4" class="outline-3">
+<h3 id="sec-1.4">1.4 I was getting error saying, Permission Denied. What should I do? </h3>
+<div id="text-1.4">
+
+<p>Try running the command with sudo.
+For example, 
+</p>
+
+
+<pre class="example">
+sudo yum install pip
+</pre>
+
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1.5" class="outline-3">
+<h3 id="sec-1.5">1.5 After i run a file, i get error stating that, process is running already. How should I kill that process ? </h3>
+<div id="text-1.5">
+
+
+
+
+<pre class="example">
+ps -ef |grep "NameofProcess"
+</pre>
+
+
+
+
+<p>
+Notice the process ID and kill it using:
+</p>
+
+
+<pre class="example">
+kill -9 process-id
+</pre>
+
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">2 OVPL Dependencies </h2>
+<div id="text-2">
+
+
+</div>
+
+<div id="outline-container-2.1" class="outline-3">
+<h3 id="sec-2.1">2.1 What is mongodb? Why should I install it? </h3>
+<div id="text-2.1">
+
+<p>MongoDB is a document database that provides high performance, high availability, and easy scalability. 
+Documents (objects) map well with programming language data types.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2.2" class="outline-3">
+<h3 id="sec-2.2">2.2 What is the use of 'backports.ssl<sub>match</sub><sub>hostname'</sub> package in Python? </h3>
+<div id="text-2.2">
+
+<p>The Secure Sockets layer is actually secure if you check the hostname in the certificate returned by the server to which you are connecting, and verify that it matches to hostname that you are trying to reach.
+</p>
+<p>
+The ssl package in the Standard Library of Python 3.2 and greater now includes a function for performing this check instead of requiring every application to implement the check separately.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2.3" class="outline-3">
+<h3 id="sec-2.3">2.3 What is meant by OpenVZ? </h3>
+<div id="text-2.3">
+
+<p>OpenVZ  is an operating system-level virtualization technology based on the Linux kernel and operating system. 
+</p>
+<p>
+OpenVZ allows a physical server to run multiple isolated operating system instances, called containers or Virtual Environments.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2.4" class="outline-3">
+<h3 id="sec-2.4">2.4 What is Python sh module? </h3>
+<div id="text-2.4">
+
+<p>sh is a full-fledged subprocess replacement for Python 2.6 - 3.2 that allows you to call any program as if it were a function.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2.5" class="outline-3">
+<h3 id="sec-2.5">2.5 What is Python netaddr module? </h3>
+<div id="text-2.5">
+
+<p>netaddr is a Python library for representing and manipulating network addresses.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2.6" class="outline-3">
+<h3 id="sec-2.6">2.6 What is the use of Python tornado ? </h3>
+<div id="text-2.6">
+
+<p>Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. 
+</p>
+<p>
+By using non-blocking network I/O, Tornado can scale to tens of thousands of open connections, making it ideal for long polling, WebSockets, and other applications that require a long-lived connection to each user.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2.7" class="outline-3">
+<h3 id="sec-2.7">2.7 I got an error like, 'No module named requests' What should I do now? </h3>
+<div id="text-2.7">
+
+<p>You can install python modules either downloading tar and extracting it (or) by using pip, by running the command,
+</p>
+
+
+<pre class="example">
+pip install requests
+</pre>
+
+
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2.8" class="outline-3">
+<h3 id="sec-2.8">2.8 What is requests module in Python? </h3>
+<div id="text-2.8">
+
+<p>Requests is an Apache2 Licensed HTTP library, written in Python.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2.9" class="outline-3">
+<h3 id="sec-2.9">2.9 How do I install pip in centos? </h3>
+<div id="text-2.9">
+
+<p>We can install pip using package manager or by downloading get-pip.py and running it.
+Using Package manager :
+</p>
+
+
+<pre class="example">
+sudo yum install python-pip
+</pre>
+
+
+
+
+
+</div>
+</div>
+</div>
+<div id="postamble"><p class="author"> Author: Prakash B Hegade and Amulya Sri, (VLEAD)
+<a href="mailto:prakash@vlabs.ac.in and amulya@vlabs.ac.in">&lt;prakash@vlabs.ac.in and amulya@vlabs.ac.in&gt;</a>
+</p>
+<p class="date"> Date: [2014-09-16 Tue]</p>
+<p>HTML generated by org-mode 6.21b in emacs 23</p>
+</div></body>
+</html>

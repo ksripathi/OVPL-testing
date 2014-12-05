@@ -1,0 +1,87 @@
+#+Title:  Frequently Asked Questions
+#+Author: Prakash B Hegade, Amulya Sri
+#+Date:   [2014-09-16 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+
+* Generic Queries
+
+** How to give read-write-execute permissions to a file?
+#+begin_src shell
+chmod 0777 fileName
+#+end_src
+
+** How can I install packages using package manager (CentOS) ?
+#+begin_src shell
+yum install packageName
+#+end_src
+
+** How can I copy file from remote system ?
+We can copy file from remote system using scp. 
+#+begin_src shell
+scp path-to-source-file user@ip:/path-to-destination
+#+end_src
+
+
+** I was getting error saying, Permission Denied. What should I do?
+Try running the command with sudo.
+For example, 
+#+begin_src shell
+sudo yum install pip
+#+end_src
+
+
+** After i run a file, i get error stating that, process is running already. How should I kill that process ?
+#+begin_src shell
+ps -ef |grep "NameofProcess"
+#+end_src
+
+Notice the process ID and kill it using:
+#+begin_src shell
+kill -9 process-id
+#+end_src
+
+
+* OVPL Dependencies 
+** What is mongodb? Why should I install it?
+MongoDB is a document database that provides high performance, high availability, and easy scalability. 
+Documents (objects) map well with programming language data types.
+
+** What is the use of 'backports.ssl_match_hostname' package in Python?
+The Secure Sockets layer is actually secure if you check the hostname in the certificate returned by the server to which you are connecting, and verify that it matches to hostname that you are trying to reach.
+
+The ssl package in the Standard Library of Python 3.2 and greater now includes a function for performing this check instead of requiring every application to implement the check separately.
+
+** What is meant by OpenVZ?
+OpenVZ  is an operating system-level virtualization technology based on the Linux kernel and operating system. 
+
+OpenVZ allows a physical server to run multiple isolated operating system instances, called containers or Virtual Environments.
+
+** What is Python sh module?
+sh is a full-fledged subprocess replacement for Python 2.6 - 3.2 that allows you to call any program as if it were a function.
+
+** What is Python netaddr module?
+netaddr is a Python library for representing and manipulating network addresses.
+
+** What is the use of Python tornado ?
+Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. 
+
+By using non-blocking network I/O, Tornado can scale to tens of thousands of open connections, making it ideal for long polling, WebSockets, and other applications that require a long-lived connection to each user.
+
+** I got an error like, 'No module named requests' What should I do now?
+You can install python modules either downloading tar and extracting it (or) by using pip, by running the command,
+#+begin_src shell
+pip install requests
+#+end_src
+
+
+** What is requests module in Python?
+Requests is an Apache2 Licensed HTTP library, written in Python.
+
+** How do I install pip in centos?
+We can install pip using package manager or by downloading get-pip.py and running it.
+Using Package manager :
+#+begin_src shell
+sudo yum install python-pip
+#+end_src
+
+

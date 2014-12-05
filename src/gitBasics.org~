@@ -1,0 +1,42 @@
+#+Title:  Version Control Basics
+#+Author: Prakash B Hegade, Amulya Sri
+#+Date:   [2014-09-16 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+
+
+* Agenda
+- Understand Version Control
+- GitHub for Version Control
+- GitHub – Basic Commands
+
+Lets Git this party started!
+
+* Objectives
+
+At the end of the session you will be able to:
+- Realize the importance of version control
+- Have an account in GitHub
+- Have GitHub commands at finger tips
+
+* Our Environment
+- Has Timely code releases
+- Multiple developers working together
+- Code Reverts and Changes
+- Who is keeping track of changes?
+
+* Version Control
+- Log every version
+- Know the difference between each
+- Revert to required version
+- Better Collaboration
+- Easy Transfer
+- Facilitates Backup
+
+* GitHub
+- Since 2008
+- A code sharing and publishing service
+- A social networking site for programmers
+Find the documentation at:
+https://help.github.com/articles/set-up-git
+
+

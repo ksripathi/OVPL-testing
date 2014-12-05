@@ -1,0 +1,118 @@
+#+Title:  OVPL Testing
+#+Author: Prakash B Hegade and Amulya Sri
+#+Date:   [2014-12-01 Wed]
+#+SETUPFILE: ./org-templates/level-0.org
+
+* Objective and Assumptions
+
+** Objective
+Testing the code developed for OVPL is necessary for the following reasons:
++ To find out any errors or bugs introduced during the development phase
++ To ensure the quality of the development
++ To validate the correctness of the code at various levels from unit to integration
+
+Few references to good documentation on Testing can be found at:
+1. [[http://www.isixsigma.com/industries/software-it/five-essentials-software-testing/][Five Essentials for Software Testing]]
+2. [[http://softwaretestingfundamentals.com/][Software Testing Fundamentals]]
+3. [[http://www.softwaretestingclass.com/what-is-software-testing-methodologies/][Software Testing Methodologies]]
+4. [[http://www.righthandtech.com/software-testing.php][Why is Software Testing Required]]
+
+** Assumptions
+Following are the assumptions made before the OVPL-testing is used:
++ The test cases are written and tested for a CentOSVZAdapter
++ User has cloned the OVPL code and has the system up and running
+  and ready to deploy the lab
+
+
+* What to Test?
+Testing is a challenging task. There are different kinds of testing
+like unit, module, integration etc which are used at various levels
+with specific purpose. 
+
+
+After the team's discussion and analysis, following conclusions were made:
++ At points essential, unit testing will be carried out. For example:
+  =the environment setup= file which sets up the environment
+  parameters to deploy and run the OVPL code.
+
++ Scenarios will be identifed, created and tested for proper functioning and
+  correctness of the code.
+
+
+* The Process
+
+The testing process is carried out using the =unittest= module
+available in python.This unit testing framework, sometimes referred to
+as “PyUnit,” is a Python language version of JUnit (JUnit is, in turn,
+a Java version of Kent’s Smalltalk testing framework). =unittest=
+supports test automation, sharing of setup and shutdown code for
+tests, aggregation of tests into collections and independence of the
+tests from the reporting framework. The unittest module provides
+classes that make it easy to support these qualities for a set of
+tests.
+
+
+A detailed documentation and tutorial about unittest can be found [[https://docs.python.org/2/library/unittest.html][Here]].
+
+
+* Testing
+Following are the identified two files which will be unit tested:
+
+File 01:
+#+begin_src python
+settings.py - contains the details of ovpl settings like subnet,
+nameserver, os, os version etc
+#+end_src
+
+
+File 02:
+#+begin_src python 
+envsetup.py - contains the details of ip address, directory paths,
+proxy set etc for ovpl environment
+#+end_src
+
+
+Three scenarios are identified to test the functionality of the OVPL.
+#+begin_src example
+Scenario 01: Creation of Virtual Machine (container)
+#+end_src
+The objective of this scenario is to test the creation of the virtual
+machine (container). OpenVZ is used in OVPL for creation of virtual
+machine and to provide the virtualization environment. A container
+will be created and destroyed in the test scenario. The creation is
+tested by testing the returned vm-id on successful creation.
+
+
+#+begin_src example
+Scenario 02: Copying VMManager files to the Container
+#+end_src
+The objective of this scenario is to test whether the VMManager files
+are copied to the container. These VMManager files are essential to
+build and deploy the lab in container. In this scenario, we create a
+container, copy VMManager files, test for the copy and then destroy
+the container.
+
+#+begin_src example
+Scenario 03: Deploying the Lab 
+#+end_src
+The objective of this scenario is to test lab deployment. In this
+scenario, we create a container, copy OVPL as well as lab source
+files, deploy the lab and test for the successful lab deployment.  The
+scenario is validated with the status returned after the successful
+deloyment of the lab.
+
+
+* How to Test
+
+Copy all the test files from the =test-cases= directory to the adapters
+directory in the OVPL source code.The directory can be found at
+#+begin_example
+/ovpl/src/adapters/
+#+end_example
+
+The test cases have to be run with admin previleges.To run the test
+cases use the command:
+#+begin_src example
+python test-file-name.py
+#+end_src
+
