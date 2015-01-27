@@ -1,0 +1,100 @@
+#+Title: Test Case for the Scenario 01: Creation of the Virtual Machine
+#+Authors: Prakash B Hegade and Amulya Sri
+#+Date: 01 December 2014
+
+* Description :
+The objective of this scenario is to test the creation of the virtual
+machine (container). OpenVZ is used in OVPL for creation of virtual
+machine and to provide the virtualization environment. A container
+will be created and destroyed in the test scenario. 
+
+* Identifying the Dependencies :
+As the test scenario will be implemented in Python, we need to import
+all the necessary modules. We firstly import all the required Python
+modules. 
+
+We would need the methods from =sys=, =netaddr=, =json=, =re=
+and =call= from =subprocess= modules.
+#+begin_src python
+import sys
+import netaddr
+import json
+import re
+from subprocess import call
+#+end_src
+
+As the scenario is to test the creation of the container, we would
+need functionalities from =AdapterServer= and =CentOSVZAdapter=.  Also
+all the settings which are present in =settings.py=.
+#+begin_src python
+import AdapterServer
+from AdapterServer import *
+
+import CentOSVZAdapter
+from CentOSVZAdapter import __all__
+
+import settings
+#+end_src
+
+
+* Defining the Test Class :
+The test class will have definitions for creating the stubs, running
+and validating the test case for creation of container and releasing all
+the created and acquired resources.
+
+A test class in python can be created by subclassing
+=unittest.TestCase=.  The test class created primarily holds two
+predefined methods namely =setUp= and =tearDown= and the test
+cases. Method =setUp= holds the stub creation and =tearDown=
+releases all the held resources.
+#+begin_src python
+class CreateContainer(unittest.TestCase):
+#+end_src
+
+The first step is to create the required stub in =setUp= method. The
+stub creation should include loading the lab specifications from the
+configuration file, getting the name of the adapter and creating the
+instance of the adapter to create the Virtual Machine (container). The
+adapter on which this scenario is tested is CentOSVZAdapter.
+#+begin_src python
+    def setUp(self):
+        self.adapter_spec = json.loads(open("../../config/config.json").read())
+        self.adapter_name = self.adapter_spec['CENTOSVZADAPTER']['ADAPTER_NAME']
+        self.module = __import__(self.adapter_name)
+        self.AdapterClass = getattr(self.module, self.adapter_name)
+        self.adapter_instance = self.AdapterClass()
+        self.lab_spec=json.loads(open("labspec.json").read())
+#+end_src
+
+The second step is to write the test cases. Here we are going to test
+the creation of the container. On successful creation of the
+container, a =vm_id= is returned. The =vm-id= is obtained by
+concatenating the last two bytes of the ip address allotted for the
+container. The test assertion will validate the =vm_id= by camparing
+it by the one generated from last two bytes of the VM ip address.
+#+begin_src python
+    def test_vm_creation(self):
+        self.vm_id = self.adapter_instance.create_vm(self.lab_spec)
+        self.ip_addr = CentOSVZAdapter.get_vm_ip(self.vm_id)
+        self.m = re.match(r'[0-9]+.[0-9]+.([0-9]+).([0-9]+)', self.ip_addr)
+        self.temp_vm_id = self.m.group(1) + self.m.group(2)
+        self.assertEqual(self.temp_vm_id, self.vm_id)
+#+end_src
+
+The third step is to release all the acquired resources. This is done
+in =tearDown= method. The created container has to be stopped and
+deleted and all the resources has to be released back to the pool.
+#+begin_src python
+    def tearDown(self):
+        call(["vzctl", "stop", self.vm_id])
+        call(["vzctl", "destroy",self.vm_id])
+#+end_src
+
+* The main Method :
+The test cases are invoked from the main method. The flow is =main=
+first calls the =setUp= method and creates the stub, invokes all the
+test cases and then calls the =tearDown= method.
+#+begin_src python
+if __name__ == "__main__":
+    unittest.main()
+#+end_src

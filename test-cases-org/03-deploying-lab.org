@@ -1,0 +1,119 @@
+#+Title: Test Case for the Scenario 02: Copying VMManager files to the Container
+#+Authors: Prakash B Hegade and Amulya Sri
+#+Date: 04 December 2014
+
+* Description : 
+The objective of this scenario is to test lab deployment. In this
+scenario, we create a container, copy OVPL as well as lab source
+files, deploy the lab and test for the successful lab deployment.
+
+
+* Identifying the dependencies :
+Since the test scenario will be implemented in Python, we need to
+import the necessary Python modules. 
+We would need, =os=, =sys=, =netaddr=, =json=, =unittest=, =re= and =call= from =subprocess= module.
+
+#+BEGIN_SRC python
+
+import os
+import sys
+import netaddr
+import json
+import unittest
+import re
+import subprocess
+from subprocess import call
+  
+#+END_SRC
+
+The second scenario is to create the container and copy the VM Manager
+code to the container. For this, we would need functionalities from
+=AdapterServer=, =CentOSVZAdapter=, =Controller= and =settings=.
+
+#+BEGIN_SRC python
+import AdapterServer
+from AdapterServer import *
+
+import settings
+from settings import *
+
+import CentOSVZAdapter
+from CentOSVZAdapter import __all__
+
+import Controller
+from Controller import *
+
+#+END_SRC
+
+
+* Defining the Test Class :
+
+The Test Class will have definitions for creating the stubs, running
+and validating the test cases and releasing all the created resources.
+A test class in Python can be created by subclassing
+=unittest.TestCase=.  This test class primarily contains two
+predefined methods namely, =setUp= and =tearDown= along with test cases.
+
+#+BEGIN_SRC python
+class TestDeployLab(unittest.TestCase):
+#+END_SRC
+
+When we define =setUp= method, test runner runs this method prior to
+every test case. In other words, =setup= creates the required stub.The
+stub creation should include loading the configurations from lab
+specification, importing the required Adapter and also importing the
+lab specficaiton for that adapter to create the container. Apart from
+this, in order to test lab, both AdapterServer and ControllerServer
+have to be running. The =setUp= method creates the stub with these
+functionalities.  The adapter being tested is CentOSVZAdapter.
+
+#+BEGIN_SRC python
+    def setUp(self):
+        controller_proc = subprocess.Popen(["nohup", "python2.6", "../ControllerServer.py", "&"])
+        adapter_proc    = subprocess.Popen(["nohup", "python2.6", "AdapterServer.py", "&"])
+        self.adapter_spec     = json.loads(open("../../config/config.json").read())
+        self.adapter_name     = self.adapter_spec['CENTOSVZADAPTER']['ADAPTER_NAME']
+        self.module           = __import__(self.adapter_name)
+        self.AdapterClass     = getattr(self.module, self.adapter_name)
+        self.adapter_instance = self.AdapterClass()
+        self.lab_spec =json.loads(open("../../scripts/labspec.json").read())
+
+#+END_SRC
+
+As mentioned above, Deployment of the lab is being tested here. We
+first create the container, copy OVPL as well as lab sources and
+deploy the lab. We then test for the successful deployment. 
+
+#+BEGIN_SRC python
+  def test_copy_source(self):
+        self.vm_id = self.adapter_instance.create_vm(self.lab_spec)
+        CentOSVZAdapter.copy_ovpl_source(self.vm_id)
+        CentOSVZAdapter.copy_lab_source(self.vm_id)
+        self.adapter_instance.start_vm_manager(self.vm_id)
+        self.controller_instance = Controller()
+        result = self.controller_instance.test_lab("cse01", "https://bitbucket.org/virtual-labs/cse02-programming")
+        deploy_path="/vz/root/"+self.vm_id+"/var/www/exp2"
+        assert(os.path.exists(deploy_path) == True)
+ 
+#+END_SRC
+
+Similar to =setUp()= method, if we define =teardown()= method, the test runner
+will invoke it after each test. In this method, we are cleaning up the
+test fixture, i.e., stopping and destroying the container.
+
+#+BEGIN_SRC python
+    def tearDown(self):
+        call(["vzctl", "stop", self.vm_id])
+        call(["vzctl", "destroy",self.vm_id])
+#+END_SRC
+
+
+* The Main :
+The final block is the =main= which shows a simple way to run the
+tests. =unittest.main()= provides a command-line interface to the test
+script.
+
+#+BEGIN_SRC python
+if __name__ == "__main__":
+    unittest.main()
+#+END_SRC
