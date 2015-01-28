@@ -32,8 +32,7 @@ class TestDeployLab(unittest.TestCase):
 		self.AdapterClass     = getattr(self.module, self.adapter_name)
 		self.adapter_instance = self.AdapterClass()
 		self.lab_spec =json.loads(open("../../scripts/labspec.json").read())
-
-       def test_copy_source(self):
+      def test_copy_source(self):
 		self.vm_id = self.adapter_instance.create_vm(self.lab_spec)
 		CentOSVZAdapter.copy_ovpl_source(self.vm_id)
 		CentOSVZAdapter.copy_lab_source(self.vm_id)
@@ -43,7 +42,7 @@ class TestDeployLab(unittest.TestCase):
 		deploy_path="/vz/root/"+self.vm_id+"/var/www/exp2"
 		assert(os.path.exists(deploy_path) == True)
 
-       def tearDown(self):
+      def tearDown(self):
 		call(["vzctl", "stop", self.vm_id])
 		call(["vzctl", "destroy",self.vm_id])
 
