@@ -4,7 +4,7 @@ import json
 import re
 from subprocess import call
 
-
+import unittest
 import AdapterServer
 from AdapterServer import *
 
